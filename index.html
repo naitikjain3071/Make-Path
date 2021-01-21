@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Path Optimizer</title>
+    <link rel = "icon" href =  
+    "https://dunedingoescarting.com/wp-content/uploads/2019/09/map-1272165_960_720.png" 
+            type = "image/x-icon"> 
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+
+    <script
+      src="https://kit.fontawesome.com/5548f5ed00.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <script src="code.js"></script>
+  </head>
+
+  <body>
+    <nav
+      class="navbar navbar-dark"
+      style="
+        font-size: 25px;
+        font-family: sans-serif;
+        background-color: #6351ce;
+        color: aquamarine;
+      "
+    >
+    <div class="container">
+      <img
+        src="https://makepath.com/wp-content/uploads/2020/01/cropped-makepath_Logo-2.png"
+        width="124"
+        height="45"
+        class="d-inline-block align-top"
+        alt=""
+      />
+      Reach your destination faster!
+    </div>
+    </nav>
+
+    <br />
+
+    <!-- main body -->
+    <div id="container">
+      <div
+        id="mynetwork"
+        style="
+          background-image: url('https://onlyvectorbackgrounds.com/wp-content/uploads/2018/09/Abstract-Ambient-Light-Background-Day-Blue.jpg');
+          background-size: cover;
+        "
+      ></div>
+      <div
+        id="container2"
+        style="
+          background-image: url('https://merriam-webster.com/assets/mw/images/article/art-wap-landing-mp-lg/map-route-image-6807-68565d04f06014aba2f90b32d2c61f45@1x.jpg');
+          background-size: cover;
+        "
+      >
+        <span
+          id="temptext2"
+          style="width: 100%; text-align: center; font-size: x-large"
+        >
+        </span>
+        <span
+          id="temptext"
+          style="width: 100%; text-align: center; font-size: x-large"
+        >
+        <br>Select Starting Point and Destination,<br> Click on "Get the Optimum Path" <br><br> Happy Journey !!
+        </span>
+        <div
+          id="mynetwork2"
+          style="
+            display: none;
+            background-image: url('https://onlyvectorbackgrounds.com/wp-content/uploads/2018/09/Abstract-Ambient-Light-Background-Day-Blue.jpg');
+            background-size: cover;
+          "
+        ></div>
+      </div>
+    </div>
+
+    <div>
+      <br />
+      <button type="button" class="btn btn-danger" id="generate-graph">
+        Generate Different Path
+      </button>
+      <br />
+      <center>
+        <label for="departure">Choose Starting Point :</label>
+        <select name="departure" id="departure">
+          <option value="1">Delhi</option>
+          <option value="2">Mumbai</option>
+          <option value="3">Amritsar</option>
+          <option value="4">Guwahati</option>
+          <option value="5">Bhubaneswar</option>
+          <option value="6">Gaya</option>
+          <option value="7">Port Blair</option>
+          <option value="8">Ahmedabad</option>
+          <option value="9">Jaipur</option>
+          <option value="10">Mangalore</option>
+          <option value="11">Kochi</option>
+          <option value="12">Kozhikode</option>
+          <option value="13">Thiruvananthapuram</option>
+          <option value="14">Goa</option>
+          <option value="15">Kanpur</option>
+          <option value="16">Jammu</option>
+          <option value="17">Hyderabad</option>
+          <option value="18">Bangalore</option>
+          <option value="19">Gangtok</option>
+          <option value="20">Meghalaya</option>
+          <option value="21">Bhopal</option>
+          <option value="22">Lucknow</option>
+        </select>
+        <br />
+        <label for="arrival">Choose Destination &nbsp;&nbsp; :</label>
+        <select name="arrival" id="arrival">
+          <option value="1">Delhi</option>
+          <option value="2">Mumbai</option>
+          <option value="3">Amritsar</option>
+          <option value="4">Guwahati</option>
+          <option value="5">Bhubaneswar</option>
+          <option value="6">Gaya</option>
+          <option value="7">Port Blair</option>
+          <option value="8">Ahmedabad</option>
+          <option value="9">Jaipur</option>
+          <option value="10">Mangalore</option>
+          <option value="11">Kochi</option>
+          <option value="12">Kozhikode</option>
+          <option value="13">Thiruvananthapuram</option>
+          <option value="14">Goa</option>
+          <option value="15">Kanpur</option>
+          <option value="16">Jammu</option>
+          <option value="17">Hyderabad</option>
+          <option value="18">Bangalore</option>
+          <option value="19">Gangtok</option>
+          <option value="20">Meghalaya</option>
+          <option value="21">Bhopal</option>
+          <option value="22">Lucknow</option>
+        </select>
+      </center>
+
+      <button type="button" class="btn btn-success" id="solve">
+        Get the Optimum Path
+      </button>
+    </div>
+    <br />
+
+
+
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          <h2>We got you the quickest path!</h2>
+          <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+          <center>
+
+            <br><p>You selected to tavel from <span id="stod"></span></p>
+            <img src="https://travelingcanucks.com/wp-content/uploads/2017/06/alberta-road-trip-1.jpg" height="70%" width="90%"><br>
+            
+            <br><p>Estimated Time: <span id="esttime"></span> hours!</p>
+          </center>
+        </div>
+        <div class="modal-footer">
+          
+          <h4>Travel is the healthiest addiction...</h4>
+        </div>
+      </div>
+    
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer
+      class="page-footer font-small"
+      style="background-color: #352a74; color: blanchedalmond"
+    >
+      <div style="background-color: #6351ce">
+        <div class="container">
+          <!-- Grid row-->
+          <div class="row py-4 d-flex align-items-center">
+            <!-- Grid column -->
+            <div
+              class="col-md-6 col-lg-5 text-center text-md-left mb-4 mb-md-0"
+            >
+              <h6 class="mb-0"></h6>
+            </div>
+            <div class="col-md-6 col-lg-7 text-center text-md-right">
+              Find our source code on GitHub!
+              <a href="https://github.com/adwait-hegde/makepath" class="tw-ic">
+                <i class="fab fa-github white-text mr-4"> </i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container text-center text-md-left mt-5">
+        <!-- Grid row -->
+        <div class="row mt-3">
+          <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
+            <center>
+              Adwait A Hegde<br />2019130019<br />&nbsp;&nbsp;
+              <a href="https://www.linkedin.com/in/adwait-hegde/" class="li-ic"><i class="fab fa-linkedin-in white-text mr-4"></i></a>
+              <a href="https://github.com/adwait-hegde/" class="tw-ic"><i class="fab fa-github white-text mr-4"></i></a>
+              <a href="https://twitter.com/adwait_hegde/" class="tw-ic"><i class="fab fa-twitter white-text mr-4"></i></a>
+            </center>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
+            <center>
+              Yash R Jagtap<br />
+              2019130020<br />&nbsp;&nbsp;&nbsp;
+              <a href="https://www.linkedin.com/in/yash-jagtap-405a37150/" class="li-ic"><i class="fab fa-linkedin-in white-text mr-4"></i></a>
+              <a href="https://github.com/Yash-Jagtap/" class="tw-ic"><i class="fab fa-github white-text mr-4"></i></a>
+              <a href="" class="tw-ic"><i class="fab fa-twitter white-text mr-4"></i></a>
+            </center>
+          </div>
+          <div class="col-md-4 col-lg-4 col-xl-4 mx-auto mb-4">
+            <center>
+              Naitik D Jain<br>
+              2019130023<br>&nbsp;&nbsp;&nbsp;
+              <a href="https://www.linkedin.com/in/naitik-jain-a440471aa/" class="li-ic"><i class="fab fa-linkedin-in white-text mr-4"></i></a>
+              <a href="https://github.com/naitikjain3071/" class="tw-ic"><i class="fab fa-github white-text mr-4"></i></a>
+              <a href="" class="tw-ic"><i class="fab fa-twitter white-text mr-4"></i></a>
+            </center>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
